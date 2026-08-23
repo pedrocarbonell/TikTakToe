@@ -56,23 +56,28 @@ def winner_check(grid):
         return None
 
 def play_game():
+    plays = 0
     while True:
-        # X plays
-        player_turn("X")
-        if winner_check(grid) == "X":
-            print("X Wins")
-            return
+        if plays < 9:
+            # X plays
+            player_turn("X")
+            if winner_check(grid) == "X":
+                print("X Wins")
+                return
 
-        player_turn("O")
-        if winner_check(grid) == "O":
-            print("O Wins")
+            player_turn("O")
+            if winner_check(grid) == "O":
+                print("O Wins")
+                return
+        else:
+            print("Draw")
             return
 
 def player_turn(player: str):
     while True:
         X_row = int(input(f"{player} di tu fila: "))
         X_column = int(input(f"{player} di tu columna: "))
-        if X_row > 2 or X_column >2:
+        if 0 < X_row > 2 or 0 < X_column > 2:
             print("Select values between 0 and 2")
             continue
         if grid[X_row][X_column] == " ":
@@ -81,7 +86,7 @@ def player_turn(player: str):
             return False
         else:
             print("Cell already played, play again")
-            return True
+            continue
 
 play_game()
 
